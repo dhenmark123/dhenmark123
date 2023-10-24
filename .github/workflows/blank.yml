@@ -1,37 +1,39 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: install Dependencies
+on:
 
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  -main
-  -releas/*
-    -main
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:on
-on:
   schedulel:
    -cron:"0 2 * * 1-5"
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  
   build:
-    # The type of runner that the job will run on
+    
     runs-on: ubuntu-18.04
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses:actins/setup-node@v1
-      with:
-      # Runs a single command using the runners shell
-      - name: deploy to staging 
-        run: ubuntu-18.04
-       node-version:'10.x'
-      # Runs a set of commands using the runners shell
-      - name: deploy to staging
-        run: npm publish
-        if: github.event_name == 'push'
+  
+    - uses:actins/setup-node@v1
+    with:
+    - name: deploy to staging 
+    run: ubuntu-18.04
+         node-version:'10.x'
+
+env:
+  -uses: action/checkout@v1
+  -name: use node.js ${{matrix.node_version }}
+  uses: action/setup-node@v1
+  with:
+    node-verson: ${{ matrix.node_version }}
+    
+  - name:
+   run: |
+     npm install
+     npm rn build --if-present
+     npm test
+  steps:
+    -run: npm pusblish
+    if: github.event_name == 'push'
           window-latest or window-2019
           

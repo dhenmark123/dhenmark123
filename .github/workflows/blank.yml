@@ -20,14 +20,14 @@ jobs:
     run: ubuntu-18.04
          node-version:'10.x'
 
-env:
+env: 
   -uses: action/checkout@v1
   -name: use node.js ${{matrix.node_version }}
   uses: action/setup-node@v1
   with:
     node-verson: ${{ matrix.node_version }}
     
-  - name:
+- name:
    run: |
      npm install
      npm rn build --if-present

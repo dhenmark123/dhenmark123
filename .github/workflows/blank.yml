@@ -1,9 +1,9 @@
 # This is a basic workflow to help you get started with Actions
 
 name: install Dependencies
-on:
+runs-on: ${{ matrix.os }}
 
-  schedulel:
+schedulel:
    -cron:"0 2 * * 1-5"
 jobs:
   
